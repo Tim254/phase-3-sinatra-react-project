@@ -1,32 +1,33 @@
-require './config/environment'
-
-
 class ApplicationController < Sinatra::Base
-
-  configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-    enable :sessions
-    register Sinatra::Flash
-    set :session_secret, "ilovemypets"
+  set :default_content_type, 'application/json'
+  
+  get "/trips" do
+    trips = Trip.sort_by_location
+    trips.to_json
   end
 
-  get "/" do
-    if logged_in?
-      redirect to '/users/index'
-    else
-      erb :index
-    end
+  get "/reviews" do
+    reviews = Review.all
+    reviews.to_json
   end
 
-  helpers do
-		def logged_in?
-			!!session[:user_id]
-		end
+  post '/reviews' do
+    review = Review.create(
+      activities_completed: params[:activities_completed],
+      comments: params[:comments],
+      rating: params[:rating],
+      date_arrived: params[:date_arrived],
+      date_departed: params[:date_departed],
+      trip_id: params[:trip_id],
+      user_id: params[:user_id]
+    )
+    review.to_json
+  end
 
-		def current_user
-			User.find(session[:user_id])
-		end
-	end 
+  delete '/reviews/:id' do
+    review = Review.find(params[:id])
+    review.destroy
+    review.to_json
+  end 
 
 end
