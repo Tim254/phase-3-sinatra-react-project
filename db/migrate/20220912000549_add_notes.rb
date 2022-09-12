@@ -4,5 +4,7 @@ class AddNotes < ActiveRecord::Migration[6.1]
       t.string :title
       t.datetime :updated
       t.string :title
+      t.integer :number
   end
+end
 end
