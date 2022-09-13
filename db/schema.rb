@@ -10,29 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_29_164915) do
+ActiveRecord::Schema.define(version: 2022_06_03_010447) do
 
-  create_table "reviews", force: :cascade do |t|
-    t.string "activities_completed"
-    t.string "comments"
-    t.integer "rating"
-    t.datetime "date_arrived"
-    t.datetime "date_departed"
-    t.integer "trip_id"
-    t.integer "user_id"
+  create_table "activities", force: :cascade do |t|
+    t.string "name"
+    t.integer "estimated_hours"
+    t.integer "percent_complete"
+    t.float "estimated_cost"
+    t.integer "order"
+  end
+
+  create_table "costs", force: :cascade do |t|
+    t.string "name"
+    t.float "total_cost"
+    t.string "category"
+    t.integer "employee_id"
+    t.integer "activity_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "trips", force: :cascade do |t|
-    t.string "location"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.float "wage_rate"
+    t.string "labor_union"
   end
 
 end
