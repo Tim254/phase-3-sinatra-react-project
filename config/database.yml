@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: db/development.sqlite3
+
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  <<: *default
+  database: d5fa8j3s7agtp6
+  username: fuluxthwlvsjst
+  host: ec2-54-246-185-161.eu-west-1.compute.amazonaws.com
+  password: 21b3fcea80dfbd6395839e1a0d84ef3fbb6c2999c8cd89544a25c83955f94422
+  
