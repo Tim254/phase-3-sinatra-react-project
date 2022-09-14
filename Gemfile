@@ -2,7 +2,6 @@
 source "https://rubygems.org"
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 # gem "rails"
-ruby "3.1.2"
 
 # https://github.com/sinatra/sinatra
 gem "sinatra", "~> 2.1"
